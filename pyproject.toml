@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "shapecomp"
+version = "0.5.0b0"
+description = "A module for compressing and decompressing shape files, powered by the TK.MSTS.Tokens.dll library from Okrasa Ghia."
+readme = "README.md"
+authors = [{name = "Peter Grønbæk Andersen", email = "peter@grnbk.io"}]
+license = {text = "GNU GPL v3"}
+dependencies = [
+    "pythonnet"
+]
+requires-python = ">=3.6"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
+    "Operating System :: OS Independent"
+]
+
+[project.urls]
+Homepage = "https://github.com/pgroenbaek/shapecomp"
