@@ -20,7 +20,7 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 import pytest
 import os
 
-import shapecomp
+import shapecompress
 
 
 @pytest.fixture(scope="module")

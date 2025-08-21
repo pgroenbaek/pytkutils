@@ -27,4 +27,4 @@ __all__ = [
 
 __author__ = 'Peter Grønbæk Andersen <peter@grnbk.io>'
 
-from .shapecomp import is_shape, is_compressed, compress, decompress
+from .shapecompress import is_shape, is_compressed, compress, decompress
