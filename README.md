@@ -73,8 +73,8 @@ pip install path/to/shapeedit-0.5.0b0-py3-none-any.whl
 ### Install from source
 
 ```sh
-git clone https://github.com/pgroenbaek/shapecomp.git
-pip install --upgrade ./shapecomp
+git clone https://github.com/pgroenbaek/shapecompress.git
+pip install --upgrade ./shapecompress
 ```
 
 ## Usage
@@ -84,7 +84,7 @@ pip install --upgrade ./shapecomp
 To check whether a shape file on disk is compressed, you can use the `is_compressed` function. This function returns `True` if the shape is compressed and `False` if it is not. If the file is empty, not a shape file, or its state cannot be determined, the function will return `None`.
 
 ```python
-import shapecomp as sc
+import shapecompress as sc
 
 is_comp = sc.is_compressed("./path/to/example.s")
 if is_comp is True:
@@ -104,7 +104,7 @@ See the [Prerequisites section](#prerequisites) for instructions on how to obtai
 Alternatively, you can manually compress and decompress shapes using other tools, such as *ffeditc\_unicode.exe* through the [Shape File Manager](https://www.trainsim.com/forums/filelib-search-fileid?fid=78928) or the [FFEDIT\_Sub v1.2](https://www.trainsim.com/forums/filelib-search-fileid?fid=40291) utility by Ged Saunders.
 
 ```python
-import shapecomp as sc
+import shapecompress as sc
 
 dll_path = "./path/to/TK.MSTS.Tokens.dll"
 
