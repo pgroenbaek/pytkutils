@@ -10,8 +10,6 @@
 
 This Python module provides ...
 
-Shapes can also be compressed and decompressed manually using other tools, such as *ffeditc\_unicode.exe* through the [Shape File Manager](https://www.trainsim.com/forums/filelib-search-fileid?fid=78928) or the [FFEDIT\_Sub v1.2](https://www.trainsim.com/forums/filelib-search-fileid?fid=40291) utility by Ged Saunders.
-
 List of companion modules:
 - [shapeio](https://github.com/pgroenbaek/shapeio) - offers functions to convert shapes between structured text format and Python objects.
 - [shapeedit](https://github.com/pgroenbaek/shapeedit) - provides a wrapper for modifying the shape data structure safely.
@@ -79,15 +77,14 @@ pip install --upgrade ./shapecomp
 
 ## Usage
 
-
 ### Check if a shape is compressed on disk
 
 To check whether a shape file on disk is compressed, you can use `shapecomp.is_compressed`. This function returns `True` if the shape is compressed and `False` if it is not. If the file is empty, not a shape file, or its state cannot be determined, the function will return `None`.
 
 ```python
-import shapecomp
+import shapecomp as sc
 
-is_comp = shapecomp.is_compressed("./path/to/example.s")
+is_comp = sc.is_compressed("./path/to/example.s")
 if is_comp is True:
     print("Compressed")
 elif is_comp is False:
@@ -105,17 +102,17 @@ See the [Prerequisites section](#prerequisites) for instructions on how to obtai
 Alternatively, you can manually compress and decompress shapes using other tools, such as *ffeditc\_unicode.exe* through the [Shape File Manager](https://www.trainsim.com/forums/filelib-search-fileid?fid=78928) or the [FFEDIT\_Sub v1.2](https://www.trainsim.com/forums/filelib-search-fileid?fid=40291) utility by Ged Saunders.
 
 ```python
-import shapecomp
+import shapecomp as sc
 
 tkutils_dll_path = "./path/to/TK.MSTS.Tokens.dll"
 
 # Compress and decompress in-place.
-shapecomp.compress(tkutils_dll_path, "./path/to/example.s")
-shapecomp.decompress(tkutils_dll_path, "./path/to/example.s")
+sc.compress(tkutils_dll_path, "./path/to/example.s")
+sc.decompress(tkutils_dll_path, "./path/to/example.s")
 
 # Compress and decompress to an output file.
-shapecomp.compress(tkutils_dll_path, "./path/to/example.s", "./path/to/output.s")
-shapecomp.decompress(tkutils_dll_path, "./path/to/example.s", "./path/to/output.s")
+sc.compress(tkutils_dll_path, "./path/to/example.s", "./path/to/output.s")
+sc.decompress(tkutils_dll_path, "./path/to/example.s", "./path/to/output.s")
 ```
 
 
