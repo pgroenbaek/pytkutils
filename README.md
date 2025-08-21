@@ -10,10 +10,43 @@
 
 This Python module provides ...
 
+Shapes can also be compressed and decompressed manually using other tools, such as *ffeditc\_unicode.exe* through the [Shape File Manager](https://www.trainsim.com/forums/filelib-search-fileid?fid=78928) or the [FFEDIT\_Sub v1.2](https://www.trainsim.com/forums/filelib-search-fileid?fid=40291) utility by Ged Saunders.
+
 List of companion modules:
 - [shapeio](https://github.com/pgroenbaek/shapeio) - offers functions to convert shapes between structured text format and Python objects.
 - [shapeedit](https://github.com/pgroenbaek/shapeedit) - provides a wrapper for modifying the shape data structure safely.
 - [trackshape-utils](https://github.com/pgroenbaek/trackshape-utils/tree/develop) - offers additional utilities for working with track shapes.
+
+
+## Prerequisites
+
+This module uses the `TK.MSTS.Tokens.dll` library by Okrasa Ghia to perform shape file compression and decompression. Therefore, a Common Language Runtime (CLR) is required if you wish to compress and decompress shapes programmatically through the module. You can use the Mono runtime on Linux and macOS, or the .NET Framework on Windows.
+
+The `TK.MSTS.Tokens.dll` library is not included with the Python module. It can be downloaded as part of the TK\_Utils package from [the-train.de](https://the-train.de/downloads/entry/9385-tk-utils-updated/). Only the DLL file itself is needed from that package.
+
+See the [Usage section](#usage) for more details on how to compress and decompress shape files using the module.
+
+Steps to install a CLR on your operating system:
+
+#### Linux
+
+```bash
+sudo apt update
+sudo apt install mono-complete
+```
+
+#### macOS
+
+```bash
+brew install mono
+```
+
+#### Windows
+
+Download and install the [.NET Framework 4.0 or later](https://dotnet.microsoft.com/en-us/download/dotnet-framework) from Microsoft.
+
+The .NET Framework is typically already installed on most Windows systems.
+
 
 ## Installation
 
@@ -41,8 +74,50 @@ pip install path/to/shapeedit-0.5.0b0-py3-none-any.whl
 
 ```sh
 git clone https://github.com/pgroenbaek/shapecomp.git
-pip install --upgrade ./shapeedit
+pip install --upgrade ./shapecomp
 ```
+
+## Usage
+
+
+### Check if a shape is compressed on disk
+
+To check whether a shape file on disk is compressed, you can use `shapecomp.is_compressed`. This function returns `True` if the shape is compressed and `False` if it is not. If the file is empty, not a shape file, or its state cannot be determined, the function will return `None`.
+
+```python
+import shapecomp
+
+is_comp = shapecomp.is_compressed("./path/to/example.s")
+if is_comp is True:
+    print("Compressed")
+elif is_comp is False:
+    print("Uncompressed")
+else:
+    print("Could not determine (possibly empty file)")
+```
+
+### Compress or decompress a shape on disk
+
+The compression and decompression functions in this module use the `TK.MSTS.Tokens.dll` library by Okrasa Ghia. This library is not included with the Python module. You will also need a CLR installed to load this file.
+
+See the [Prerequisites section](#prerequisites) for instructions on how to obtain the `TK.MSTS.Tokens.dll` library and set up a CLR on your operating system.
+
+Alternatively, you can manually compress and decompress shapes using other tools, such as *ffeditc\_unicode.exe* through the [Shape File Manager](https://www.trainsim.com/forums/filelib-search-fileid?fid=78928) or the [FFEDIT\_Sub v1.2](https://www.trainsim.com/forums/filelib-search-fileid?fid=40291) utility by Ged Saunders.
+
+```python
+import shapecomp
+
+tkutils_dll_path = "./path/to/TK.MSTS.Tokens.dll"
+
+# Compress and decompress in-place.
+shapecomp.compress(tkutils_dll_path, "./path/to/example.s")
+shapecomp.decompress(tkutils_dll_path, "./path/to/example.s")
+
+# Compress and decompress to an output file.
+shapecomp.compress(tkutils_dll_path, "./path/to/example.s", "./path/to/output.s")
+shapecomp.decompress(tkutils_dll_path, "./path/to/example.s", "./path/to/output.s")
+```
+
 
 ## Running Tests
 
