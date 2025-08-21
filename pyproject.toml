@@ -21,3 +21,5 @@ classifiers = [
 
 [project.urls]
 Homepage = "https://github.com/pgroenbaek/shapecompress"
+Issues = "https://github.com/pgroenbaek/shapecompress/issues"
+Source = "https://github.com/pgroenbaek/shapecompress"

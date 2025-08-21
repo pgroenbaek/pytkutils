@@ -12,7 +12,11 @@ setup(
     description="A module for compressing and decompressing shape files, powered by the TK.MSTS.Tokens.dll library from Okrasa Ghia.",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
-    url="https://github.com/pgroenbaek/shapecompress",
+    project_urls={
+        "Homepage": "https://github.com/pgroenbaek/shapecompress",
+        "Issues": "https://github.com/pgroenbaek/shapecompress/issues",
+        "Source": "https://github.com/pgroenbaek/shapecompress",
+    },
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
