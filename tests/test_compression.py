@@ -1,5 +1,5 @@
 """
-This file is part of ShapeIO.
+This file is part of ShapeCompress.
 
 Copyright (C) 2025 Peter Grønbæk Andersen <peter@grnbk.io>
 

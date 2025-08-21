@@ -1,5 +1,5 @@
 """
-ShapeComp
+ShapeCompress
 
 This module handles compressing and decompressing shape files
 using the TK.MSTS.Tokens.dll library from Okrasa Ghia.

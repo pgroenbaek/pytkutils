@@ -3,7 +3,7 @@ requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "shapecomp"
+name = "shapecompress"
 version = "0.5.0b0"
 description = "A module for compressing and decompressing shape files, powered by the TK.MSTS.Tokens.dll library from Okrasa Ghia."
 readme = "README.md"
@@ -20,4 +20,4 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/pgroenbaek/shapecomp"
+Homepage = "https://github.com/pgroenbaek/shapecompress"
