@@ -10,7 +10,7 @@
 
 This Python module provides functions for compressing and decompressing shape files.
 
-Unlike other tools for compressing and decompressing shapes this Python module also works on Linux and macOS. It is powered by the `TK.MSTS.Tokens.dll` library from Okrasa Ghia.
+Unlike other tools for compressing and decompressing shape files this Python module also works on Linux and macOS. It is powered by the `TK.MSTS.Tokens.dll` library from Okrasa Ghia.
 
 List of companion modules:
 - [shapeio](https://github.com/pgroenbaek/shapeio) - offers functions to convert shapes between structured text format and Python objects.
