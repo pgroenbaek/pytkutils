@@ -18,6 +18,7 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 """
 
 import os
+import shutil
 import codecs
 import tempfile
 from typing import Optional
@@ -140,7 +141,7 @@ def compress(
     else:
         if already_compressed:
             if input_filepath != output_filepath:
-                copy(input_filepath, output_filepath)
+                shutil.copyfile(input_filepath, output_filepath)
             
             return False
         
@@ -195,7 +196,7 @@ def decompress(
     else:
         if not currently_compressed:
             if input_filepath != output_filepath:
-                copy(input_filepath, output_filepath)
+                shutil.copyfile(input_filepath, output_filepath)
             
             return False
         
