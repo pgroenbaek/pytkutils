@@ -81,7 +81,7 @@ pip install --upgrade ./shapecomp
 
 ### Check if a shape is compressed on disk
 
-To check whether a shape file on disk is compressed, you can use `shapecomp.is_compressed`. This function returns `True` if the shape is compressed and `False` if it is not. If the file is empty, not a shape file, or its state cannot be determined, the function will return `None`.
+To check whether a shape file on disk is compressed, you can use the `is_compressed` function. This function returns `True` if the shape is compressed and `False` if it is not. If the file is empty, not a shape file, or its state cannot be determined, the function will return `None`.
 
 ```python
 import shapecomp as sc
@@ -106,15 +106,15 @@ Alternatively, you can manually compress and decompress shapes using other tools
 ```python
 import shapecomp as sc
 
-tkutils_dll_path = "./path/to/TK.MSTS.Tokens.dll"
+dll_path = "./path/to/TK.MSTS.Tokens.dll"
 
 # Compress and decompress in-place.
-sc.compress(tkutils_dll_path, "./path/to/example.s")
-sc.decompress(tkutils_dll_path, "./path/to/example.s")
+sc.compress(dll_path, "./path/to/example.s")
+sc.decompress(dll_path, "./path/to/example.s")
 
 # Compress and decompress to an output file.
-sc.compress(tkutils_dll_path, "./path/to/example.s", "./path/to/output.s")
-sc.decompress(tkutils_dll_path, "./path/to/example.s", "./path/to/output.s")
+sc.compress(dll_path, "./path/to/example.s", "./path/to/output.s")
+sc.decompress(dll_path, "./path/to/example.s", "./path/to/output.s")
 ```
 
 
