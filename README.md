@@ -8,7 +8,7 @@ This Python module wraps the `TK.MSTS.Tokens.dll` library by Okrasa Ghia. The mo
 
 While it relies on a .NET DLL, it is also compatible with Linux and macOS through the Mono runtime.
 
-The `TK.MSTS.Tokens.dll` file itself can be downloaded separately as part of the **TK\_Utils** package from [the-train.de](https://the-train.de/downloads/entry/9385-tk-utils-updated/).
+The `TK.MSTS.Tokens.dll` file itself can be downloaded separately as part of the **TK\_Utils** package available at [the-train.de](https://the-train.de/downloads/entry/9385-tk-utils-updated/).
 
 ## Prerequisites
 
