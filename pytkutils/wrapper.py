@@ -48,7 +48,7 @@ def check_dependencies():
     if system == "Linux" or system == "Darwin":
         if not shutil.which("mono"):
             raise EnvironmentError(
-                "Mono is required to compress and decompress shapes but was not found.\n"
+                "Mono is required to compress and decompress but was not found.\n"
                 "Install it via: sudo apt install mono-complete (Linux)\n"
                 "Or: brew install mono (macOS)"
             )
@@ -56,10 +56,10 @@ def check_dependencies():
         try:
             output = subprocess.check_output(["reg", "query", "HKLM\\SOFTWARE\\Microsoft\\NET Framework Setup\\NDP\\v4\\Full"], stderr=subprocess.DEVNULL)
             if b"Install" not in output:
-                raise EnvironmentError("Required .NET Framework not detected. Unable to compress and decompress shapes.")
+                raise EnvironmentError("Required .NET Framework not detected. Unable to compress and decompress.")
         except Exception:
             raise EnvironmentError(
-                "The .NET Framework is required to compress and decompress shapes, but it was not found.\n"
+                "The .NET Framework is required to compress and decompress, but it was not found.\n"
                 "Install it from: https://dotnet.microsoft.com/en-us/download/dotnet-framework"
             )
     else:
