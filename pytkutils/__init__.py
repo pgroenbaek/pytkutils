@@ -1,8 +1,7 @@
 """
-ShapeCompress
+pyTKUtils
 
-This module handles compressing and decompressing shape files
-using the TK.MSTS.Tokens.dll library from Okrasa Ghia.
+A Python wrapper for the TK.MSTS.Tokens.dll library by Okrasa Ghia.
 
 Copyright (C) 2025 Peter Grønbæk Andersen <peter@grnbk.io>
 
@@ -20,11 +19,11 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see <https://www.gnu.org/licenses/>.
 """
 
-__version__ = '0.5.0b0'
+__version__ = '0.1.0'
 __all__ = [
-    'is_shape', 'is_compressed', 'compress', 'decompress',
+    'is_compressed', 'compress', 'decompress',
 ]
 
 __author__ = 'Peter Grønbæk Andersen <peter@grnbk.io>'
 
-from .shapecompress import is_shape, is_compressed, compress, decompress
+from .compression import is_compressed, compress, decompress

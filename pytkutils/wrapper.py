@@ -1,5 +1,5 @@
 """
-This file is part of ShapeCompress.
+This file is part of pyTKUtils.
 
 Copyright (C) 2025 Peter Grønbæk Andersen <peter@grnbk.io>
 
@@ -24,6 +24,9 @@ import platform
 import shutil
 import subprocess
 from pathlib import Path
+
+
+_token_file_handler_instance = None
 
 
 def check_dependencies():
@@ -63,9 +66,9 @@ def check_dependencies():
         raise EnvironmentError(f"Unsupported OS: {system}")
 
 
-def load_tkutils_dll(tkutils_dll_path: str):
+def get_token_file_handler(tkutils_dll_path: str):
     """
-    Loads the TK.MSTS.Tokens .NET DLL and returns a TokenFileHandler instance.
+    Loads TK.MSTS.Tokens.dll and returns a TokenFileHandler instance.
 
     Args:
         tkutils_dll_path (str): The file path to the TK.MSTS.Tokens DLL.
@@ -77,8 +80,11 @@ def load_tkutils_dll(tkutils_dll_path: str):
     Returns:
         TokenFileHandler: An instance of the TokenFileHandler class from the loaded DLL.
     """
-    dll_path = Path(tkutils_dll_path)
+    global _token_file_handler_instance
+    if _token_file_handler_instance is not None:
+        return _token_file_handler_instance
 
+    dll_path = Path(tkutils_dll_path)
     if not dll_path.exists():
         raise FileNotFoundError(f".NET DLL not found at: {dll_path}")
 
@@ -95,16 +101,17 @@ def load_tkutils_dll(tkutils_dll_path: str):
         ) from e
 
     from TK.MSTS.Tokens import TokenFileHandler
-    return TokenFileHandler()
+    _token_file_handler_instance = TokenFileHandler()
+    return _token_file_handler_instance
 
 
-def compress_shape(input_path: str, output_path: str, tkutils_dll_path: str) -> bool:
+def compress(input_path: str, output_path: str, tkutils_dll_path: str) -> bool:
     """
-    Compresses a shape file using the TK.MSTS.Tokens DLL.
+    Compresses a file using the TK.MSTS.Tokens DLL.
 
     Args:
-        input_path (str): Path to the uncompressed input shape file.
-        output_path (str): Path where the compressed shape file will be saved.
+        input_path (str): Path to the uncompressed input file.
+        output_path (str): Path where the compressed file will be saved.
         tkutils_dll_path (str): Path to the TK.MSTS.Tokens DLL.
 
     Raises:
@@ -116,17 +123,17 @@ def compress_shape(input_path: str, output_path: str, tkutils_dll_path: str) -> 
         bool: True if compression succeeded, False otherwise.
     """
     check_dependencies()
-    handler = load_tkutils_dll(tkutils_dll_path)
+    handler = get_token_file_handler(tkutils_dll_path)
     return handler.Compress(input_path, output_path)
 
 
-def decompress_shape(input_path: str, output_path: str, tkutils_dll_path: str) -> bool:
+def decompress(input_path: str, output_path: str, tkutils_dll_path: str) -> bool:
     """
-    Decompresses a shape file using the TK.MSTS.Tokens DLL.
+    Decompresses a file using the TK.MSTS.Tokens DLL.
 
     Args:
-        input_path (str): Path to the compressed input shape file.
-        output_path (str): Path where the decompressed shape file will be saved.
+        input_path (str): Path to the compressed input file.
+        output_path (str): Path where the decompressed file will be saved.
         tkutils_dll_path (str): Path to the TK.MSTS.Tokens DLL.
 
     Raises:
@@ -138,6 +145,6 @@ def decompress_shape(input_path: str, output_path: str, tkutils_dll_path: str) -
         bool: True if decompression succeeded, False otherwise.
     """
     check_dependencies()
-    handler = load_tkutils_dll(tkutils_dll_path)
+    handler = get_token_file_handler(tkutils_dll_path)
     return handler.Decompress(input_path, output_path)
 

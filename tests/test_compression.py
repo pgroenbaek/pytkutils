@@ -1,5 +1,5 @@
 """
-This file is part of ShapeCompress.
+This file is part of pyTKUtils.
 
 Copyright (C) 2025 Peter Grønbæk Andersen <peter@grnbk.io>
 
@@ -20,7 +20,7 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 import pytest
 import os
 
-import shapecompress
+import pytkutils
 
 
 @pytest.fixture(scope="module")
@@ -37,8 +37,8 @@ def global_storage():
 def test_shape_compression(global_storage):
     shape_filepath = global_storage["shape"]
     shape_output_filepath = global_storage["shape_compressed"]
-    shapecomp.compress(shape_filepath, shape_output_filepath, "./TK.MSTS.Tokens.dll")
-    assert shapecomp.is_compressed(shape_output_filepath)
+    pytkutils.compress(shape_filepath, shape_output_filepath, "./TK.MSTS.Tokens.dll")
+    assert pytkutils.is_compressed(shape_output_filepath)
 
 
 @pytest.mark.dependency(depends=["test_shape_compression"])
@@ -46,5 +46,5 @@ def test_shape_compression(global_storage):
 def test_shape_decompression(global_storage):
     shape_filepath = global_storage["shape_compressed"]
     shape_output_filepath = global_storage["shape_decompressed"]
-    shapecomp.decompress(shape_filepath, shape_output_filepath, "./TK.MSTS.Tokens.dll")
-    assert not shapecomp.is_compressed(shape_output_filepath)
+    pytkutils.decompress(shape_filepath, shape_output_filepath, "./TK.MSTS.Tokens.dll")
+    assert not pytkutils.is_compressed(shape_output_filepath)

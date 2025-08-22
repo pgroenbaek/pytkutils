@@ -1,21 +1,21 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="shapecompress",
-    version="0.5.0b0",
+    name="pytkutils",
+    version="0.1.0",
     packages=find_packages(),
     install_requires=[
         "pythonnet"
     ],
     author="Peter Grønbæk Andersen",
     author_email="peter@grnbk.io",
-    description="A module for compressing and decompressing shape files, powered by the TK.MSTS.Tokens.dll library from Okrasa Ghia.",
+    description="A Python wrapper for the TK.MSTS.Tokens.dll library by Okrasa Ghia.",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
     project_urls={
-        "Homepage": "https://github.com/pgroenbaek/shapecompress",
-        "Issues": "https://github.com/pgroenbaek/shapecompress/issues",
-        "Source": "https://github.com/pgroenbaek/shapecompress",
+        "Homepage": "https://github.com/pgroenbaek/pytkutils",
+        "Issues": "https://github.com/pgroenbaek/pytkutils/issues",
+        "Source": "https://github.com/pgroenbaek/pytkutils",
     },
     classifiers=[
         "Programming Language :: Python :: 3",

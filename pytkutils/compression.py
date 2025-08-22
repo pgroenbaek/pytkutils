@@ -1,5 +1,5 @@
 """
-This file is part of ShapeCompress.
+This file is part of pyTKUtils.
 
 Copyright (C) 2025 Peter Grønbæk Andersen <peter@grnbk.io>
 
@@ -23,7 +23,7 @@ import codecs
 import tempfile
 from typing import Optional
 
-from . import compression
+from . import wrapper
 
 
 def _detect_encoding(filepath: str) -> str:
@@ -66,10 +66,10 @@ def _detect_encoding(filepath: str) -> str:
 
 def is_compressed(filepath: str) -> Optional[bool]:
     """
-    Determines whether a shape file is compressed.
+    Determines whether a file is compressed.
 
     Args:
-        filepath (str): Path to the shape file to inspect.
+        filepath (str): Path to the file to inspect.
 
     Returns:
         bool:
@@ -84,9 +84,13 @@ def is_compressed(filepath: str) -> Optional[bool]:
     """
     with open(filepath, 'r', encoding=_detect_encoding(filepath)) as f:
         try:
-            header = f.read(32)
-            if header.startswith("SIMISA@@@@@@@@@@JINX0s1t______"):
+            header = f.read(8)
+            if header.startswith("SIMISA@F"):
+                return True
+            
+            elif header.startswith("SIMISA@@"):
                 return False
+            
             return None
         except UnicodeDecodeError:
             pass
@@ -100,7 +104,7 @@ def compress(
     output_filepath: Optional[str] = None
 ) -> bool:
     """
-    Compresses a shape file if it is not already compressed.
+    Compresses a file if it is not already compressed.
 
     If `output_filepath` is None, the file is compressed in place using a temporary file.
     If the file is already compressed, no changes are made. If an output path is given
@@ -108,7 +112,7 @@ def compress(
 
     Args:
         tkutils_dll_filepath (str): Path to the TK.MSTS.Tokens DLL.
-        input_filepath (str): Path to the input shape file.
+        input_filepath (str): Path to the input file.
         output_filepath (Optional[str]): Destination path for the compressed file,
                                          or None to compress in place.
 
@@ -132,7 +136,7 @@ def compress(
             tmp_filepath = tmp.name
         
         try:
-            compression.compress_shape(input_filepath, tmp_filepath, tkutils_dll_filepath)
+            wrapper.compress(input_filepath, tmp_filepath, tkutils_dll_filepath)
             os.replace(tmp_filepath, input_filepath)
             return True
         finally:
@@ -145,7 +149,7 @@ def compress(
             
             return False
         
-        return compression.compress_shape(input_filepath, output_filepath, tkutils_dll_filepath)
+        return wrapper.compress(input_filepath, output_filepath, tkutils_dll_filepath)
 
 
 def decompress(
@@ -154,7 +158,7 @@ def decompress(
     output_filepath: Optional[str] = None
 ) -> bool:
     """
-    Decompresses a shape file if it is currently compressed.
+    Decompresses a file if it is currently compressed.
 
     If `output_filepath` is None, the file is decompressed in place using a temporary file.
     If the file is already decompressed, no changes are made. If an output path is given
@@ -162,7 +166,7 @@ def decompress(
 
     Args:
         tkutils_dll_filepath (str): Path to the TK.MSTS.Tokens DLL.
-        input_filepath (str): Path to the input shape file.
+        input_filepath (str): Path to the input file.
         output_filepath (Optional[str]): Destination path for the decompressed file,
                                          or None to decompress in place.
 
@@ -186,7 +190,7 @@ def decompress(
             tmp_filepath = tmp.name
         
         try:
-            compression.decompress_shape(input_filepath, tmp_filepath, tkutils_dll_filepath)
+            wrapper.decompress(input_filepath, tmp_filepath, tkutils_dll_filepath)
             os.replace(tmp_filepath, input_filepath)
             return True
         finally:
@@ -200,23 +204,5 @@ def decompress(
             
             return False
         
-        return compression.decompress_shape(input_filepath, output_filepath, tkutils_dll_filepath)
+        return wrapper.decompress(input_filepath, output_filepath, tkutils_dll_filepath)
 
-
-def is_shape(filepath: str) -> bool:
-    """
-    Checks if the given file is a shape file.
-
-    Args:
-        filepath (str): Path to the file to check.
-
-    Returns:
-        bool: True if the file is a shape file (compressed or uncompressed),
-              False if it cannot be identified as a shape file.
-
-    Raises:
-        FileNotFoundError: If the file does not exist.
-        PermissionError: If the file cannot be accessed.
-        OSError: If an I/O error occurs while opening the file.
-    """
-    return is_compressed(filepath) is not None
