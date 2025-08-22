@@ -8,6 +8,8 @@ This Python module wraps the `TK.MSTS.Tokens.dll` library by Okrasa Ghia. The mo
 
 While it relies on a .NET DLL, it is also compatible with Linux and macOS through the Mono runtime.
 
+The DLL file itself can be downloaded seperately as part of the TK\_Utils package from [the-train.de](https://the-train.de/downloads/entry/9385-tk-utils-updated/).
+
 ## Prerequisites
 
 A Common Language Runtime (CLR) is required if you wish to compress and decompress through this module. You can use the Mono runtime on Linux and macOS, or the .NET Framework on Windows.
@@ -160,3 +162,5 @@ Modify `envlist` to match the Python versions you want to support.
 ## License
 
 This Python module was created by Peter Grønbæk Andersen and is licensed under [GNU GPL v3](/LICENSE).
+
+**NOTE:** The `TK.MSTS.Tokens.dll` library itself comes with a different license by Okrasa Ghia. That license can be found in the TK\_Utils package from [the-train.de](https://the-train.de/downloads/entry/9385-tk-utils-updated/).
