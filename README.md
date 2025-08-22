@@ -8,7 +8,7 @@ This Python module wraps the `TK.MSTS.Tokens.dll` library by Okrasa Ghia. The mo
 
 While it relies on a .NET DLL, it is also compatible with Linux and macOS through the Mono runtime.
 
-The `TK.MSTS.Tokens.dll` file itself can be downloaded separately as part of the [**TK\_Utils** package](https://the-train.de/downloads/entry/9385-tk-utils-updated/).
+The `TK.MSTS.Tokens.dll` file itself can be downloaded separately as part of the [TK\_Utils package](https://the-train.de/downloads/entry/9385-tk-utils-updated/).
 
 ## Prerequisites
 
@@ -43,7 +43,7 @@ The .NET Framework is typically already installed on most Windows systems.
 
 ## Installation
 
-<!-- ### Install from PyPI
+### Install from PyPI
 
 ```sh
 pip install --upgrade pytkutils
@@ -61,7 +61,7 @@ Replace `<version>` with the actual version number in the filename. For example:
 
 ```sh
 pip install path/to/pytkutils-0.1.0-py3-none-any.whl
-``` -->
+```
 
 ### Install from source
 
