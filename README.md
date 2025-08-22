@@ -69,7 +69,7 @@ pip install --upgrade ./pytkutils
 
 ## Usage
 
-### Check if a file is compressed on disk
+### Check if a file on disk is compressed
 
 To check whether a file on disk is compressed, you can use the `is_compressed` function. This function returns `True` if the file is compressed and `False` if it is not. If the file is empty or its state cannot be determined, the function will return `None`.
 
