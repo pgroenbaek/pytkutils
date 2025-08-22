@@ -85,7 +85,7 @@ else:
     print("Could not determine (possibly empty file)")
 ```
 
-### Compress or decompress
+### Compress or decompress files
 
 The compression and decompression functions in this module use the `TK.MSTS.Tokens.dll` library by Okrasa Ghia. This library is not included with the Python module. You will also need a CLR installed to load this file.
 
