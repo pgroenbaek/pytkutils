@@ -8,13 +8,14 @@ This Python module wraps the `TK.MSTS.Tokens.dll` library by Okrasa Ghia. The mo
 
 While it relies on a .NET DLL, it is also compatible with Linux and macOS through the Mono runtime.
 
-The DLL file itself can be downloaded seperately as part of the TK\_Utils package from [the-train.de](https://the-train.de/downloads/entry/9385-tk-utils-updated/).
+The `TK.MSTS.Tokens.dll` file itself can be downloaded separately as part of the **TK\_Utils** package from [the-train.de](https://the-train.de/downloads/entry/9385-tk-utils-updated/).
 
 ## Prerequisites
 
 A Common Language Runtime (CLR) is required if you wish to compress and decompress through this module. You can use the Mono runtime on Linux and macOS, or the .NET Framework on Windows.
 
-The `TK.MSTS.Tokens.dll` library is not included with the Python module. It can be downloaded as part of the TK\_Utils package from [the-train.de](https://the-train.de/downloads/entry/9385-tk-utils-updated/). Only the DLL file itself is needed from that package.
+The `TK.MSTS.Tokens.dll` library is not bundled with this Python module. It is available as part of the **TK\_Utils** package from [the-train.de](https://the-train.de/downloads/entry/9385-tk-utils-updated/).
+
 
 See the [Usage section](#usage) for more details on how to compress and decompress shape and world files using the module.
 
