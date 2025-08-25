@@ -17,34 +17,113 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see <https://www.gnu.org/licenses/>.
 """
 
-import pytest
 import os
-
-import pytkutils
-
-
-@pytest.fixture(scope="module")
-def global_storage():
-    return {
-        "shape": "./tests/data/DK10f_A1tPnt5dLft.s",
-        "shape_decompressed": "./tests/data/DK10f_A1tPnt5dLft_decompressed.s",
-        "shape_compressed": "./tests/data/DK10f_A1tPnt5dLft_compressed.s"
-    }
+import shutil
+import tempfile
+import pytest
+import pytkutils.compression as pytkutils
 
 
-@pytest.mark.dependency(name="test_shape_compression")
-@pytest.mark.skipif(not os.path.exists("./TK.MSTS.Tokens.dll"), reason="requires TK.MSTS.Tokens.dll to be present in the file system")
-def test_shape_compression(global_storage):
-    shape_filepath = global_storage["shape"]
-    shape_output_filepath = global_storage["shape_compressed"]
-    pytkutils.compress(shape_filepath, shape_output_filepath, "./TK.MSTS.Tokens.dll")
-    assert pytkutils.is_compressed(shape_output_filepath)
+@pytest.fixture
+def sample_file(tmp_path):
+    f = tmp_path / "test.s"
+    f.write_text("SIMISA@@\nThis is uncompressed text")
+    return str(f)
 
 
-@pytest.mark.dependency(depends=["test_shape_compression"])
-@pytest.mark.skipif(not os.path.exists("./TK.MSTS.Tokens.dll"), reason="requires TK.MSTS.Tokens.dll to be present in the file system")
-def test_shape_decompression(global_storage):
-    shape_filepath = global_storage["shape_compressed"]
-    shape_output_filepath = global_storage["shape_decompressed"]
-    pytkutils.decompress(shape_filepath, shape_output_filepath, "./TK.MSTS.Tokens.dll")
-    assert not pytkutils.is_compressed(shape_output_filepath)
+@pytest.fixture
+def dll_file(tmp_path):
+    f = tmp_path / "TK.MSTS.Tokens.dll"
+    f.write_text("dummy dll")
+    return str(f)
+
+
+def test_compress_already_compressed_with_output(monkeypatch, sample_file, dll_file, tmp_path):
+    monkeypatch.setattr(pytkutils, "is_compressed", lambda path: True)
+
+    called = {}
+    monkeypatch.setattr(pytkutils.wrapper, "compress", lambda inp, out, dll: called.setdefault("compress", True))
+
+    out = tmp_path / "out.s"
+    result = pytkutils.compress(dll_file, sample_file, str(out))
+    assert result is False
+    assert "compress" not in called
+    assert os.path.exists(out)  # should just copy
+
+
+def test_compress_already_compressed_inplace(monkeypatch, sample_file, dll_file):
+    monkeypatch.setattr(pytkutils, "is_compressed", lambda path: True)
+
+    called = {}
+    monkeypatch.setattr(pytkutils.wrapper, "compress", lambda inp, out, dll: called.setdefault("compress", True))
+
+    result = pytkutils.compress(dll_file, sample_file, None)
+    assert result is False
+    assert "compress" not in called
+
+
+def test_compress_not_compressed_with_output(monkeypatch, sample_file, dll_file, tmp_path):
+    monkeypatch.setattr(pytkutils, "is_compressed", lambda path: False)
+
+    called = {}
+
+    def fake_compress(inp, out, dll):
+        called["compress"] = True
+        shutil.copyfile(inp, out)
+        return True
+
+    monkeypatch.setattr(pytkutils.wrapper, "compress", fake_compress)
+
+    out = tmp_path / "out.s"
+    result = pytkutils.compress(dll_file, sample_file, str(out))
+    assert result is True
+    assert "compress" in called
+    assert os.path.exists(out)
+
+
+def test_compress_not_compressed_inplace(monkeypatch, sample_file, dll_file):
+    monkeypatch.setattr(pytkutils, "is_compressed", lambda path: False)
+
+    called = {}
+
+    def fake_compress(inp, out, dll):
+        called["compress"] = True
+        shutil.copyfile(inp, out)
+        return True
+
+    monkeypatch.setattr(pytkutils.wrapper, "compress", fake_compress)
+
+    result = pytkutils.compress(dll_file, sample_file, None)
+    assert result is True
+    assert "compress" in called
+
+
+def test_decompress_already_decompressed_with_output(monkeypatch, sample_file, dll_file, tmp_path):
+    monkeypatch.setattr(pytkutils, "is_compressed", lambda path: False)
+
+    called = {}
+    monkeypatch.setattr(pytkutils.wrapper, "decompress", lambda inp, out, dll: called.setdefault("decompress", True))
+
+    out = tmp_path / "out.s"
+    result = pytkutils.decompress(dll_file, sample_file, str(out))
+    assert result is False
+    assert "decompress" not in called
+    assert os.path.exists(out)  # should just copy
+
+
+def test_decompress_not_decompressed_inplace(monkeypatch, sample_file, dll_file):
+    monkeypatch.setattr(pytkutils, "is_compressed", lambda path: True)
+
+    called = {}
+
+    def fake_decompress(inp, out, dll):
+        called["decompress"] = True
+        shutil.copyfile(inp, out)
+        return True
+
+    monkeypatch.setattr(pytkutils.wrapper, "decompress", fake_decompress)
+
+    result = pytkutils.decompress(dll_file, sample_file, None)
+    assert result is True
+    assert "decompress" in called
+

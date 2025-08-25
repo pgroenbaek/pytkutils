@@ -6,13 +6,13 @@
 
 This Python module wraps the `TK.MSTS.Tokens.dll` library by Okrasa Ghia. The module allows you to compress and decompress MSTS files such as shape, terrain and world files.
 
-While it relies on a .NET DLL, it also works fine on Linux and macOS using the Mono runtime.
+While this module relies on a .NET DLL, it also works fine on Linux and macOS using the Mono runtime.
 
 The `TK.MSTS.Tokens.dll` file itself can be downloaded separately as part of the [TK\_Utils package](https://the-train.de/downloads/entry/9385-tk-utils-updated/).
 
 ## Prerequisites
 
-A Common Language Runtime (CLR) is required if you wish to compress and decompress through this module. You can use the Mono runtime on Linux and macOS, or the .NET Framework on Windows.
+A Common Language Runtime (CLR) is required if you wish to compress and decompress files through this module. You can use the Mono runtime on Linux and macOS, or the .NET Framework on Windows.
 
 The `TK.MSTS.Tokens.dll` library is not bundled with this Python module. It is available as part of the **TK\_Utils** package from [the-train.de](https://the-train.de/downloads/entry/9385-tk-utils-updated/).
 
@@ -93,7 +93,7 @@ else:
 
 The compression and decompression functions in this module use the `TK.MSTS.Tokens.dll` library by Okrasa Ghia. This library is not included with the Python module. You will also need a CLR installed to load this file.
 
-See the [Prerequisites section](#prerequisites) for instructions on how to obtain the `TK.MSTS.Tokens.dll` library and set up a CLR on your operating system.
+See the [Prerequisites section](#prerequisites) for instructions on how to obtain the `TK.MSTS.Tokens.dll` library and set up a CLR on your machine.
 
 Alternatively, you can manually compress and decompress using other tools, such as *ffeditc\_unicode.exe* through the [Shape File Manager](https://www.trainsim.com/forums/filelib-search-fileid?fid=78928) or the [FFEDIT\_Sub v1.2](https://www.trainsim.com/forums/filelib-search-fileid?fid=40291) utility by Ged Saunders.
 
@@ -120,7 +120,7 @@ You can run tests manually or use `tox` to test across multiple Python versions.
 First, install the required dependencies:
 
 ```sh
-pip install pytest
+pip install pytest pytest-dependency
 ```
 
 Then, run tests with:

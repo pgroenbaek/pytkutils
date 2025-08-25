@@ -2,10 +2,10 @@ from setuptools import setup, find_packages
 
 setup(
     name="pytkutils",
-    version="0.1.0",
+    version="0.1.1",
     packages=find_packages(),
     install_requires=[
-        "pythonnet"
+        "pythonnet>=3.0.0,<4.0.0"
     ],
     author="Peter Grønbæk Andersen",
     author_email="peter@grnbk.io",
