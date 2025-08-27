@@ -80,11 +80,11 @@ To check whether a file on disk is compressed, you can use the `is_compressed` f
 ```python
 import pytkutils
 
-is_comp = pytkutils.is_compressed("./path/to/example.s")
+compressed = pytkutils.is_compressed("./path/to/example.s")
 
-if is_comp is True:
+if compressed is True:
     print("Compressed")
-elif is_comp is False:
+elif compressed is False:
     print("Uncompressed")
 else:
     print("Could not determine (possibly empty file)")
