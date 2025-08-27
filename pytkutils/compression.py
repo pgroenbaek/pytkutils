@@ -44,13 +44,21 @@ def is_compressed(filepath: str) -> Optional[bool]:
         PermissionError: If the file cannot be accessed.
         OSError: If an I/O error occurs while opening the file.
     """
-    with open(filepath, 'rb') as f:
-        header = f.read(8)
+    with open(filepath, "rb") as f:
+        bom = f.read(2)
+        unicode = (bom == b"\xFF\xFE")
 
-        if header.startswith(b"SIMISA@F"):
+        if unicode:
+            buf = f.read(32)
+            header = buf.decode("utf-16le")[:16]
+        else:
+            buf = bom + f.read(14)
+            header = buf.decode("ascii", errors="ignore")[:8]
+
+        if header.startswith("SIMISA@F") or header.startswith("\r\nSIMISA@F"):
             return True
 
-        elif header.startswith(b"SIMISA@@"):
+        elif header.startswith("SIMISA@@") or header.startswith("\r\nSIMISA@@"):
             return False
 
         return None
