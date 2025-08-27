@@ -61,7 +61,7 @@ pip install path/to/pytkutils-<version>‑py3‑none‑any.whl
 Replace `<version>` with the actual version number in the filename. For example:
 
 ```sh
-pip install path/to/pytkutils-0.1.0-py3-none-any.whl
+pip install path/to/pytkutils-0.1.1-py3-none-any.whl
 ```
 
 ### Install from source
