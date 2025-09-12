@@ -46,11 +46,11 @@ def is_compressed(filepath: str) -> Optional[bool]:
     """
     with open(filepath, "rb") as f:
         bom = f.read(2)
-        is_unicode = (bom == b"\xFF\xFE")
+        is_unicode = (bom == codecs.BOM_UTF16_LE)
 
         if is_unicode:
             buffer = f.read(32)
-            header = buffer.decode("utf-16le")[:16]
+            header = buffer.decode("utf-16-le")[:16]
         else:
             buffer = bom + f.read(14)
             header = buffer.decode("ascii", errors="ignore")[:8]
