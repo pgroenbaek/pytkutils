@@ -11,7 +11,7 @@ This Python module wraps the `TK.MSTS.Tokens.dll` library by Okrasa Ghia. The mo
 > It is **not included** with this Python module. You must download the DLL yourself.
 
 > [!NOTE]
-> Only compression appears to work properly using `TK.MSTS.Tokens.dll`.
+> Only compression appears to work properly.
 > The DLL fails internally for decompression regardless of operating system.
 
 See also:
