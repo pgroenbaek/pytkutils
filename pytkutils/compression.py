@@ -103,7 +103,8 @@ def compress(
         
         try:
             wrapper.compress(input_filepath, tmp_filepath, tkutils_dll_filepath)
-            os.replace(tmp_filepath, input_filepath)
+            shutil.copy2(tmp_filepath, input_filepath)
+            os.remove(tmp_filepath)
             return True
         finally:
             if os.path.exists(tmp_filepath):
@@ -157,7 +158,8 @@ def decompress(
         
         try:
             wrapper.decompress(input_filepath, tmp_filepath, tkutils_dll_filepath)
-            os.replace(tmp_filepath, input_filepath)
+            shutil.copy2(tmp_filepath, input_filepath)
+            os.remove(tmp_filepath)
             return True
         finally:
             if os.path.exists(tmp_filepath):

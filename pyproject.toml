@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pytkutils"
-version = "0.1.1"
+version = "0.1.2"
 description = "A Python wrapper for the TK.MSTS.Tokens.dll library by Okrasa Ghia."
 readme = "README.md"
 authors = [{name = "Peter Grønbæk Andersen", email = "peter@grnbk.io"}]
