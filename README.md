@@ -176,6 +176,12 @@ Only compression appears to work through `TK.MSTS.Tokens.dll`. The DLL fails int
 
 As an alternative, on Windows, you can use the [pyffeditc](https://github.com/pgroenbaek/pyffeditc) module that uses `ffeditc_unicode.exe` and works for both compression and decompression.
 
+## Contributing
+
+Contributions of all kinds are welcome. These could be suggestions, issues, bug fixes, documentation improvements, or new features.
+
+For more details see the [contribution guidelines](/CONTRIBUTING.md).
+
 ## License
 
 This Python module was created by Peter Grønbæk Andersen and is licensed under [GNU GPL v3](https://github.com/pgroenbaek/pytkutils/blob/master/LICENSE).
