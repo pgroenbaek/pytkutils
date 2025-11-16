@@ -88,7 +88,7 @@ def compress(
 
     Raises:
         EnvironmentError: If required runtime dependencies (Mono or .NET) are missing.
-        FileNotFoundError: If the input file or specified DLL file is not found.
+        FileNotFoundError: If the input file, output directory or specified DLL file is not found.
         ImportError: If the DLL fails to load.
         OSError: If file operations fail.
     """
@@ -99,7 +99,7 @@ def compress(
             return False
         
         with tempfile.NamedTemporaryFile(delete=False) as tmp:
-            tmp_filepath = tmp.name
+            tmp_filepath = tmp.name + ".s"
         
         try:
             wrapper.compress(input_filepath, tmp_filepath, tkutils_dll_filepath)
@@ -143,7 +143,7 @@ def decompress(
 
     Raises:
         EnvironmentError: If required runtime dependencies (Mono or .NET) are missing.
-        FileNotFoundError: If the input file or specified DLL file is not found.
+        FileNotFoundError: If the input file, output directory or specified DLL file is not found.
         ImportError: If the DLL fails to load.
         OSError: If file operations fail.
     """
@@ -154,7 +154,7 @@ def decompress(
             return False
         
         with tempfile.NamedTemporaryFile(delete=False) as tmp:
-            tmp_filepath = tmp.name
+            tmp_filepath = tmp.name + ".s"
         
         try:
             wrapper.decompress(input_filepath, tmp_filepath, tkutils_dll_filepath)

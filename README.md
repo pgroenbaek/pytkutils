@@ -64,11 +64,7 @@ If you have downloaded a `.whl` file from the [Releases](https://github.com/pgro
 pip install path/to/pytkutils-<version>‑py3‑none‑any.whl
 ```
 
-Replace `<version>` with the actual version number in the filename. For example:
-
-```sh
-pip install path/to/pytkutils-0.1.2-py3-none-any.whl
-```
+Replace `<version>` with the actual version number in the filename.
 
 ### Install from source
 

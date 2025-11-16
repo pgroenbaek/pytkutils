@@ -116,12 +116,20 @@ def compress(input_path: str, output_path: str, tkutils_dll_path: str) -> bool:
 
     Raises:
         EnvironmentError: If required runtime dependencies are missing.
-        FileNotFoundError: If the DLL cannot be found.
+        FileNotFoundError: If the input_path, output_path directory or DLL cannot be found.
         ImportError: If the DLL cannot be loaded.
 
     Returns:
         bool: True if compression succeeded, False otherwise.
     """
+    if not os.path.exists(input_path):
+        raise FileNotFoundError(f"No such file or directory: '{input_path}")
+    
+    output_directory = os.path.dirname(output_path)
+
+    if not os.path.isdir(output_directory):
+        raise FileNotFoundError(f"No such file or directory: '{output_directory}")
+
     check_dependencies()
     handler = get_token_file_handler(tkutils_dll_path)
     return handler.Compress(input_path, output_path)
@@ -138,12 +146,20 @@ def decompress(input_path: str, output_path: str, tkutils_dll_path: str) -> bool
 
     Raises:
         EnvironmentError: If required runtime dependencies are missing.
-        FileNotFoundError: If the DLL cannot be found.
+        FileNotFoundError: If the input_path, output_path directory or DLL cannot be found.
         ImportError: If the DLL cannot be loaded.
 
     Returns:
         bool: True if decompression succeeded, False otherwise.
     """
+    if not os.path.exists(input_path):
+        raise FileNotFoundError(f"No such file or directory: '{input_path}")
+    
+    output_directory = os.path.dirname(output_path)
+
+    if not os.path.isdir(output_directory):
+        raise FileNotFoundError(f"No such file or directory: '{output_directory}")
+
     check_dependencies()
     handler = get_token_file_handler(tkutils_dll_path)
     return handler.Decompress(input_path, output_path)
