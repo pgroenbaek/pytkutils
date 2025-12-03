@@ -125,10 +125,10 @@ def compress(input_path: str, output_path: str, tkutils_dll_path: str) -> bool:
     if not os.path.exists(input_path):
         raise FileNotFoundError(f"No such file or directory: '{input_path}")
     
-    output_directory = os.path.dirname(output_path)
+    output_dir = os.path.dirname(output_path)
 
-    if not os.path.isdir(output_directory):
-        raise FileNotFoundError(f"No such file or directory: '{output_directory}")
+    if not os.path.isdir(output_dir):
+        raise FileNotFoundError(f"No such file or directory: '{output_dir}")
 
     check_dependencies()
     handler = get_token_file_handler(tkutils_dll_path)

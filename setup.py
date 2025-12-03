@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="pytkutils",
-    version="0.1.2",
+    version="0.1.3",
     packages=find_packages(),
     install_requires=[
         "pythonnet>=3.0.0,<4.0.0"
@@ -22,5 +22,5 @@ setup(
         "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
         "Operating System :: OS Independent",
     ],
-    python_requires=">=3.6",
+    python_requires=">=3.7, <3.14",
 )
